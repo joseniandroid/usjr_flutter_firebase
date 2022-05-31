@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../services/auth_service.dart';
+import '../utils/ui.dart';
+
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
   final TextEditingController _emailCtrl = TextEditingController();
   final TextEditingController _passwordCtrl = TextEditingController();
+  final AuthService _authService = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +33,7 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(height: 30),
             TextField(
               controller: _passwordCtrl,
+              obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
@@ -39,7 +44,20 @@ class LoginScreen extends StatelessWidget {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  if (_emailCtrl.text.isEmpty || _passwordCtrl.text.isEmpty) {
+                    UiUtils.showSnackbarError(
+                        context, 'All fields are required');
+                  } else {
+                    final user = await _authService.loginUser(
+                      _emailCtrl.text,
+                      _passwordCtrl.text,
+                    );
+                    if (user != null) {
+                      print(user);
+                    }
+                  }
+                },
                 child: const Text(
                   'Submit',
                   style: TextStyle(
