@@ -32,6 +32,7 @@ class RegisterScreen extends StatelessWidget {
             const SizedBox(height: 30),
             TextField(
               controller: _passwordCtrl,
+              obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Password',
                 border: OutlineInputBorder(),
@@ -40,6 +41,7 @@ class RegisterScreen extends StatelessWidget {
             const SizedBox(height: 30),
             TextField(
               controller: _confirmPasswordCtrl,
+              obscureText: true,
               decoration: const InputDecoration(
                 labelText: 'Confirm Password',
                 border: OutlineInputBorder(),
@@ -50,7 +52,15 @@ class RegisterScreen extends StatelessWidget {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (_emailCtrl.text.isEmpty || _passwordCtrl.text.isEmpty) {
+                    showSnackbarError(context, 'All fields are required');
+                  } else if (_passwordCtrl.text != _confirmPasswordCtrl.text) {
+                    showSnackbarError(context, 'Passwords do not match');
+                  } else {
+                    // TOOD: register the user to firebase
+                  }
+                },
                 child: const Text(
                   'Submit',
                   style: TextStyle(
@@ -74,6 +84,15 @@ class RegisterScreen extends StatelessWidget {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  void showSnackbarError(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
       ),
     );
   }
