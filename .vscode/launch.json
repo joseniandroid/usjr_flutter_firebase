@@ -1,0 +1,26 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Android",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "192.168.1.7:5555"
+    },
+    {
+      "name": "iPhone 13 Pro Max",
+      "request": "launch",
+      "type": "dart",
+      "deviceId": "7B437712-4626-4577-8157-384CCF0229E7"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "All Devices",
+      "configurations": ["Android", "iPhone 13 Pro Max"]
+    }
+  ]
+}
