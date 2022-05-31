@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../utils/ui.dart';
 import 'login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -54,9 +55,11 @@ class RegisterScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   if (_emailCtrl.text.isEmpty || _passwordCtrl.text.isEmpty) {
-                    showSnackbarError(context, 'All fields are required');
+                    UiUtils.showSnackbarError(
+                        context, 'All fields are required');
                   } else if (_passwordCtrl.text != _confirmPasswordCtrl.text) {
-                    showSnackbarError(context, 'Passwords do not match');
+                    UiUtils.showSnackbarError(
+                        context, 'Passwords do not match');
                   } else {
                     // TOOD: register the user to firebase
                   }
@@ -84,15 +87,6 @@ class RegisterScreen extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-
-  void showSnackbarError(BuildContext context, String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.red,
       ),
     );
   }

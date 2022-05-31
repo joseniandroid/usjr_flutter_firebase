@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/ui.dart';
+
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
@@ -40,7 +42,14 @@ class LoginScreen extends StatelessWidget {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (_emailCtrl.text.isEmpty || _passwordCtrl.text.isEmpty) {
+                    UiUtils.showSnackbarError(
+                        context, 'All fields are required');
+                  } else {
+                    // TODO: Login the user
+                  }
+                },
                 child: const Text(
                   'Submit',
                   style: TextStyle(
